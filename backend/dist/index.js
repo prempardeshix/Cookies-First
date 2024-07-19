@@ -13,7 +13,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: "http://localhost:6969",
+    origin: "http://localhost:5173",
 }));
 app.post("/signin", (req, res) => {
     const email = req.body.email;
@@ -31,9 +31,11 @@ app.get("/user", (req, res) => {
     });
 });
 app.post("/logout", (req, res) => {
-    res.clearCookie("token");
+    res.cookie("token", "");
     res.json({
         msg: "Cookie deleted!",
     });
 });
-app.listen(6969);
+app.listen(6969, () => {
+    console.log("Listening on Port 6969");
+});
